@@ -1,4 +1,4 @@
-
+--1
 --RELACION UNO A Muchos CUENTAS CON usuario
 CREATE TABLE usuario (
    cedula char (5) PRIMARY KEY,
@@ -7,8 +7,6 @@ CREATE TABLE usuario (
   tipo_cuenta VARCHAR(20),
   limite_credito DECIMAL(10, 2)
 ); 
-insert into usuario values('1659','Francis','Smith','Corriente',5000.0);
-insert into usuario values('1660','Hernan','Sangucho','Ahorros',8000.0);
 
 
 
@@ -30,7 +28,7 @@ select numero_cuenta,nombre from cuentas,usuario where saldo > money(100) and sa
 select * from cuentas,usuario where fecha_creacion between'21/09/2022' and '21/09/2023'
 
 
-
+-----2---
 
 --RELACION UNO A MUCHOS CLIENTES CON COMPRAS 
 CREATE TABLE clientes (
@@ -56,7 +54,7 @@ select nombre,apellido from clientes where cedula like'%7%'
 
 
 
-
+----3
 --RELACION DE UNO A MUCHOS ESTUDIANTES CON PROFESORES
 
 CREATE TABLE estudiantes (
@@ -85,7 +83,7 @@ CREATE TABLE Profesores (
 
 SELECT * FROM  estudiantes WHERE codigo_profesor = (SELECT codigo FROM profesores WHERE nombre = 'FRANCISCO');
 select codigo,apellido from Profesores,estudiantes where apellido like '%n'
-
+-----4
 	---RELACION UNO A MUCHOS ENTRE PERSONA Y PRESTAMO
 CREATE TABLE persona (
   cedula char (10) not null PRIMARY KEY,
@@ -113,6 +111,9 @@ SELECT * FROM persona prestamo WHERE cedula = (SELECT cedula FROM persona WHERE 
 select cantidad_ahorrada,monto,garante from persona,prestamo where monto > money(100) and monto< money(1000)   
 
 
+
+-- 5
+
 ---RELACION UNO A MUCHOS PRODUCTOS CON VENTAS
 Create table productos(
 	codigo int not null,
@@ -139,7 +140,7 @@ select nombre,stock,cantidad from productos,ventas  where nombre like '%m%' or d
 
 
 
-
+---6
 --RELACION UNO A MUCHOS ENTRE TRANSACCIONES CON BANCO
 Create table transacciones(
 codigo int not null, 
@@ -160,11 +161,11 @@ CREATE TABLE banco (
 
 
 
-SELECT * FROM transacciones WHERE codigo = (SELECT codigo_transaccion FROM banco WHERE codigo_banco = 'codigo_banco');
+SELECT * FROM transacciones WHERE codigo = (SELECT codigo_transaccion FROM banco WHERE codigo_banco = 1);
 Select * from transacciones,banco where tipo='C' and numero_Cuenta between '22001' and '22004'
 
 
-
+---7
 --RELACION UNO A MUCHOS VIDEOJUEGOS CON PLATAFORMAS
 create table videojuegos(
 	codigo int not null,
@@ -182,11 +183,11 @@ CREATE TABLE plataformas (
   FOREIGN KEY (codigo_videojuego) REFERENCES videojuegos(codigo)
 );
 
-SELECT * FROM  plataformas WHERE codigo_videojuego = (SELECT codigo FROM videojuegos WHERE nombre = 'nombre_videojuego');
+SELECT * FROM  plataformas WHERE codigo_videojuego = (SELECT codigo FROM videojuegos WHERE nombre = 'God of War');
 select nombre,valoracion,nombre_plataforma from videojuegos,plataformas where descripcion='Guerra' and valoracion > 7 and nombre like'C%' or valoracion > 8 and nombre like'D%' 
 
 
-
+---8
 --REGISTROS_ENTRADA UNO A MUCHOS CON EMPELADO
 create table registros_entrada(
 	codigo_registro int not null,
@@ -204,9 +205,10 @@ create table empleado(
 )
 
 							
-SELECT * FROM  empleado WHERE codigo_registro = (SELECT codigo_registro FROM registros_entrada WHERE cedula_empleado = 'cedula_empleado');
+SELECT * FROM  empleado WHERE codigo_registro = (SELECT codigo_registro FROM registros_entrada WHERE cedula_empleado = '2210');
 select cedula_empleado,nombre from registros_entrada,empleado where fecha between '01/08/2023' and '31/08/2023' or cedula_empleado like '17%' and hora between '08:00' and '12:00'
 or fecha between '06/10/2023' and '20/10/2023' and cedula_empleado like '08%' and hora between '09:00' and '13:00'
+
 
 
 
