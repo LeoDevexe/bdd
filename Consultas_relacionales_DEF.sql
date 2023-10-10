@@ -83,7 +83,7 @@ CREATE TABLE Profesores (
 );
 
 SELECT * FROM  estudiantes WHERE codigo_profesor = (SELECT codigo FROM profesores WHERE nombre = 'FRANCISCO');
-SELECT Profesores.codigo,estudiantes.nombre,estudiantes.apellido FROM Profesores,estudiantes where apellido like '%n'
+SELECT Profesores.codigo,estudiantes.nombre,estudiantes.apellido from Profesores,estudiantes where apellido like '%n'
 
 SELECT * FROM Profesores
 -----4
@@ -139,6 +139,8 @@ CREATE TABLE ventas (
 
 
 SELECT * FROM  ventas WHERE codigo_producto = (SELECT codigo FROM productos WHERE nombre = 'Deja');
+----CONSULTA NUEVA
+SELECT nombre,stock FROM productos WHERE codigo =(SELECT codigo_producto FROM ventas WHERE cantidad= 5);
 select nombre,stock,cantidad from productos,ventas  where nombre like '%m%' or descripcion='0'
 
 
